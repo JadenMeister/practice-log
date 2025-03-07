@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      #root {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100vw;
+        height: 100vh;
+      }
+
+      #root > div {
+        width: 100px;
+        height: 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <div id="q">Q : 1초</div>
+      <div id="w">W : 2초</div>
+      <div id="e">E : 3초</div>
+      <div id="r">R : 4초</div>
+    </div>
+
+    <script>
+      const root = document.getElementById("root");
+      const buttons = root.children;
+      console.log(buttons);
+
+      const commands = {
+        q: {
+          skill: "물마시기",
+          cooltime: 1000,
+          isUse: true
+        },
+        w: {
+          skill: "콜라마시기",
+          cooltime: 2000,
+          isUse: true
+        },
+        e: {
+          skill: "커피마시기",
+          cooltime: 3000,
+          isUse: true
+        },
+        r: {
+          skill: "에너지드링크마시기",
+          cooltime: 4000,
+          isUse: true
+        }
+      };
+
+      root.addEventListener("click", (event) => {
+        // 만약 클릭을 했다면,
+
+        const target = event.target;
+        console.log(target.id);
+
+        let timer = setTimeout(() => {
+          if (commands[target.id].isUse === true) {
+            event.target.style.backgroundColor = "red";
+            event.target.textContent = "쿨타임 도는 중";
+            commands[target.id].isUse = true;
+
+            setTimeout(() => {
+              event.target.style.backgroundColor = "";
+              event.target.textContent =
+                commands[target.id].skill + " 사용 가능";
+              commands[target.id].isUse = false;
+            }, commands[target.id].cooltime);
+
+            let countDown = setInterval(() => {
+              if (commands[target.id].isUse === true) {
+                event.target.textContent =
+                  commands[target.id].skill +
+                  " : " +
+                  commands[target.id].cooltime / 1000;
+                commands[target.id].cooltime += 1000;
+              } else {
+                commands[target.id].isUse = false;
+                clearInterval(countDown);
+              }
+            }, 16);
+          }
+        }, 0);
+      });
+    </script>
+  </body>
+</html>
