@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>어라 뭐지?</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+    function checkpoint() {
+        const header = React.createElement(
+            "header",
+            { style: { backgroundColor: "#f1f1f1", padding: "10px", textAlign: "center" } },
+            "헤더 영역"
+        );
+
+        const main = React.createElement(
+            "main",
+            { style: { minHeight: "200px", padding: "20px", textAlign: "center" } },
+            "메인 콘텐츠 영역"
+        );
+
+        const footer = React.createElement(
+            "footer",
+            { style: { backgroundColor: "#f1f1f1", padding: "10px", textAlign: "center" } },
+            "푸터 영역"
+        );
+
+        const container = React.createElement(
+            "div",
+            { id: "container", style: { border: "1px solid #ccc" } },
+            header,
+            main,
+            footer
+        );
+
+        return container;
+    }
+
+    const elementTree = checkpoint();
+
+    const appContainer = document.getElementById("app");
+    const root = ReactDOM.createRoot(appContainer);
+    root.render(elementTree);
+</script>
+</body>
+</html>
